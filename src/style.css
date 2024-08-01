@@ -1,0 +1,22 @@
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template: auto/2fr 1fr;
+}
+
+.current-weather {
+  background-color: aquamarine;
+  grid-column-start: 1;
+}
+
+.forecast-container {
+  grid-column-start: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.forecast-weather {
+  background-color: aqua;
+}
