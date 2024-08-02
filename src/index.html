@@ -3,18 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <title>Weather App</title>
 </head>
 <body>
   <header>
-    <div class="search-container">
-      <form action="#" class="search-form">
-        <input type="text" id="location-search">
-        <div id="autocomplete-container"></div> 
-        <button type="submit">Search!</button>
-      </form>
-    </div>
-    <div class="error-container"></div>
+      <div class="logo-container">
+        <div class="logo">WeatherApp</div>
+        <div class="icon-container"><img></div>
+      </div>
+      <div class="form-container">
+        <div class="search-icon"><span class="material-symbols-outlined">search</span></div>
+        <form action="#" class="search-form">
+          <div class="first-row">
+            <input type="text" id="location-search"> 
+            <button type="submit">Search!</button>
+            <div id="autocomplete-container"></div>
+          </div>
+          <div class="second-row">
+            <div class="error-container"></div>
+          </div>
+        </form>
+      </div>
   </header>
 
   <div class="current-weather">

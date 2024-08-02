@@ -1,9 +1,102 @@
+@font-face {
+  font-family: 'inconsolatamedium';
+  src: url('fonts/inconsolata-webfont.woff2') format('woff2'),
+       url('fonts/inconsolata-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   display: grid;
   grid-template: auto/2fr 1fr;
+  font-family: "inconsolatamedium", 'Times New Roman', sans-serif;
+}
+
+header {
+  grid-column: span 2;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.logo-container,
+.form-container {
+  display: flex;
+  align-items: center;
+}
+
+.form-container {
+  gap: 1rem;
+  padding-top: 1rem;
+  /* position: relative; */
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-form input {
+  width: 30vw;
+  border-radius: 10px;
+  min-height: 1.2rem;
+  font-family: inherit;
+  padding: 2px 5px;
+  box-sizing: border-box;
+}
+
+.search-form button {
+  font-family: inherit;
+  background-color: beige;
+  border-radius: 7px;
+}
+
+.search-icon {
+  align-self: flex-start;
+}
+
+#autocomplete-container {
+  box-sizing: border-box;
+  position: absolute;
+  z-index: 10;
+  width: 30vw;
+  background-color: aliceblue;
+  border-radius: 7px;
+  top: 100%;
+}
+
+.location-suggestion {
+  padding: 0.25rem;
+  border-bottom: 2px solid red;
+}
+
+.icon-container {
+  width: 7vw;
+}
+
+.icon-container img {
+  width: 100%;
+}
+
+.first-row {
+  display: flex;
+  gap: 1rem;
+  position: relative;
+}
+
+.error-container {
+  height: 2rem;
+  box-sizing: border-box;
+  padding-top: 0.5rem;
+  width: 50vw;
 }
 
 .current-weather {
@@ -19,4 +112,12 @@ body {
 
 .forecast-weather {
   background-color: aqua;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
 }

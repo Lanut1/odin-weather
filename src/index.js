@@ -1,4 +1,7 @@
 import './style.css';
+import { format, parse } from "date-fns";
+import { formatInTimeZone } from 'date-fns-tz';
+import clearDayIcon from './icons/clear-day.svg';
 
 const locationName = document.querySelector(".location-name");
 const locationCountry = document.querySelector(".location-country");
@@ -9,6 +12,7 @@ const feelsLike = document.querySelector(".feels-like-temperature");
 const weatherForecast = document.querySelectorAll(".forecast-weather");
 
 const errorContainer = document.querySelector(".error-container");
+let blurTimeout;
 
 async function getUserLocation() {
   try {
@@ -21,6 +25,18 @@ async function getUserLocation() {
     console.error('Error fetching user location:', error);
     return null;
   }
+}
+
+function updateTime(locationTimezone, container) {
+  const date = new Date();
+  const formattedDateAndTime = formatInTimeZone(date, locationTimezone, "PPpp")
+  container.innerText = formattedDateAndTime;
+}
+
+function formatDate(dateString, container) {
+  const date = parse(dateString, "yyyy-MM-dd", new Date());
+  const formattedDate = format(date, "PP");
+  container.innerText = formattedDate;
 }
 
 async function getCurrentWeather(location = null) {
@@ -40,7 +56,7 @@ async function getCurrentWeather(location = null) {
 
     locationName.innerText = weatherData.location.name;
     locationCountry.innerText = weatherData.location.country;
-    locationTime.innerText = weatherData.location.localtime;
+    setInterval(() => updateTime(weatherData.location.tz_id, locationTime), 1000);
     temperatureIcon.src = weatherData.current.condition.icon;
     temperatureDegrees.innerText = weatherData.current.temp_c;
     feelsLike.innerText = weatherData.current.feelslike_c;
@@ -54,8 +70,7 @@ async function getCurrentWeather(location = null) {
         const icon = forecastContainer.querySelector(".forecast-icon img");
         const minTemp = forecastContainer.querySelector(".min-degrees");
         const maxTemp = forecastContainer.querySelector(".max-degrees");
-
-        date.innerText = day.date;
+        formatDate(day.date, date);
         icon.src = day.day.condition.icon;
         minTemp.innerText = day.day.mintemp_c;
         maxTemp.innerText = day.day.maxtemp_c;
@@ -95,6 +110,7 @@ async function handleSearchInput() {
       locationSuggestion.appendChild(cityCountryContainer);
 
       locationSuggestion.addEventListener("click", () => {
+        clearTimeout(blurTimeout);
         searchInput.value = cityCountryContainer.innerText
         autocompleteContainer.replaceChildren();
         getCurrentWeather(searchInput.value);
@@ -130,12 +146,24 @@ const searchForm = document.querySelector(".search-form");
 searchInput.addEventListener("input", () => handleSearchInput());
 
 searchInput.addEventListener("focus", () => {
+  clearTimeout(blurTimeout);
   errorContainer.innerText = "";
+  handleSearchInput();
 })
 
+
+searchInput.addEventListener("blur", () => {
+  blurTimeout = setTimeout(() => {
+    autocompleteContainer.replaceChildren();
+  }, 150);  // 150ms delay
+});
+
 searchForm.addEventListener("submit", (event) => {
-  searchInput.blur();
   handleSearchSubmit(event);
+  searchInput.blur();
 });
 
 getCurrentWeather();
+
+const headerIcon = document.querySelector(".icon-container img");
+headerIcon.src = clearDayIcon;
