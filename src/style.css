@@ -104,6 +104,14 @@ header {
   grid-column-start: 1;
 }
 
+.temperature-icon {
+  width: 20vw;
+}
+
+.temperature-icon img {
+  width: 100%;
+}
+
 .forecast-container {
   grid-column-start: 2;
   display: flex;
@@ -112,6 +120,10 @@ header {
 
 .forecast-weather {
   background-color: aqua;
+}
+
+.forecast-icon {
+  width: 10vw;
 }
 
 .material-symbols-outlined {

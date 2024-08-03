@@ -2,11 +2,13 @@ import './style.css';
 import { format, parse } from "date-fns";
 import { formatInTimeZone } from 'date-fns-tz';
 import clearDayIcon from './icons/clear-day.svg';
+import getWeatherIcon from './weatherIcons';
 
 const locationName = document.querySelector(".location-name");
 const locationCountry = document.querySelector(".location-country");
 const locationTime = document.querySelector(".location-time");
 const temperatureIcon = document.querySelector(".temperature-icon img");
+const iconDescription = document.querySelector(".icon-description");
 const temperatureDegrees = document.querySelector(".temperature-degrees");
 const feelsLike = document.querySelector(".feels-like-temperature");
 const weatherForecast = document.querySelectorAll(".forecast-weather");
@@ -57,7 +59,11 @@ async function getCurrentWeather(location = null) {
     locationName.innerText = weatherData.location.name;
     locationCountry.innerText = weatherData.location.country;
     setInterval(() => updateTime(weatherData.location.tz_id, locationTime), 1000);
-    temperatureIcon.src = weatherData.current.condition.icon;
+    const weatherCode = weatherData.current.condition.code;
+    const isDay = weatherData.current.is_day;
+    const weatherIcon = getWeatherIcon(weatherCode, isDay);
+    temperatureIcon.src = weatherIcon;
+    iconDescription.innerText = weatherData.current.condition.text;
     temperatureDegrees.innerText = weatherData.current.temp_c;
     feelsLike.innerText = weatherData.current.feelslike_c;
 
@@ -71,7 +77,9 @@ async function getCurrentWeather(location = null) {
         const minTemp = forecastContainer.querySelector(".min-degrees");
         const maxTemp = forecastContainer.querySelector(".max-degrees");
         formatDate(day.date, date);
-        icon.src = day.day.condition.icon;
+        const forecastCode = day.day.condition.code;
+        const forecastIcon = getWeatherIcon(forecastCode, true)
+        icon.src = forecastIcon;
         minTemp.innerText = day.day.mintemp_c;
         maxTemp.innerText = day.day.maxtemp_c;
       }
