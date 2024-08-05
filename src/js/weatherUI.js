@@ -1,27 +1,36 @@
 import getWeatherIcon from './weatherIcons';
 import { updateTime, formatDate } from './dateUtils';
 import getCurrentWeather from './currentWeather';
+import clearDayIcon from '../icons/clear-day.svg';
+import clearNightIcon from '../icons/clear-night.svg';
 
-const locationName = document.querySelector(".location-name");
-const locationCountry = document.querySelector(".location-country");
+const locationInfo = document.querySelector(".location-info");
 const locationTime = document.querySelector(".location-time");
 const temperatureIcon = document.querySelector(".temperature-icon img");
 const iconDescription = document.querySelector(".icon-description");
 const temperatureDegrees = document.querySelector(".temperature-degrees");
-const feelsLike = document.querySelector(".feels-like-temperature");
 const weatherForecast = document.querySelectorAll(".forecast-weather");
+const body = document.querySelector("body");
 
 function makeCurrentWeatherUI(weatherData){
-  locationName.innerText = weatherData.location.name;
-  locationCountry.innerText = weatherData.location.country;
+  body.classList.remove("day", "night");
+  locationInfo.innerText = `${weatherData.location.name}, ${weatherData.location.country}`;
   updateTime(weatherData.location.tz_id, locationTime);
   const weatherCode = weatherData.current.condition.code;
   const isDay = weatherData.current.is_day;
+  const headerIcon = document.querySelector(".icon-container img");
+  if (isDay) {
+    body.classList.add("day");
+    headerIcon.src = clearDayIcon;
+  } else {
+    body.classList.add("night");
+    headerIcon.src = clearNightIcon;
+  }
+
   const weatherIcon = getWeatherIcon(weatherCode, isDay);
   temperatureIcon.src = weatherIcon;
   iconDescription.innerText = weatherData.current.condition.text;
-  temperatureDegrees.innerText = weatherData.current.temp_c;
-  feelsLike.innerText = weatherData.current.feelslike_c;
+  temperatureDegrees.innerText = `${weatherData.current.temp_c}°C`;
 };
 
 function makeForecastWeatherUI(weatherData) {
@@ -37,8 +46,8 @@ function makeForecastWeatherUI(weatherData) {
       const forecastCode = day.day.condition.code;
       const forecastIcon = getWeatherIcon(forecastCode, true)
       icon.src = forecastIcon;
-      minTemp.innerText = day.day.mintemp_c;
-      maxTemp.innerText = day.day.maxtemp_c;
+      minTemp.innerText = `${day.day.mintemp_c}°C` ;
+      maxTemp.innerText = `${day.day.maxtemp_c}°C`;
     }
   })
 };

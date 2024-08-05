@@ -7,43 +7,38 @@
   <title>Weather App</title>
 </head>
 <body>
-  <header>
-      <div class="logo-container">
-        <div class="logo">WeatherApp</div>
-        <div class="icon-container"><img></div>
-      </div>
-      <div class="form-container">
-        <div class="search-icon"><span class="material-symbols-outlined">search</span></div>
-        <form action="#" class="search-form">
-          <div class="first-row">
-            <input type="text" id="location-search"> 
-            <button type="submit">Search!</button>
-            <div id="autocomplete-container"></div>
-          </div>
-          <div class="second-row">
-            <div class="error-container"></div>
-          </div>
-        </form>
-      </div>
-  </header>
+  <div class="logo-container">
+    <div class="logo">WeatherApp</div>
+    <div class="icon-container"><img></div>
+  </div>
+  
+  <form action="#" class="search-form">
+    <div class="first-row">
+      <input type="text" id="location-search"> 
+      <button type="submit">Search!</button>
+      <div id="autocomplete-container"></div>
+    </div>
+    <div class="second-row">
+      <div class="error-container"></div>
+    </div>
+  </form>
 
   <div class="current-weather">
-    <div class="location-info">
-      <div class="location-name"></div>
-      <div class="location-country"></div>
-    </div>
+    <div class="location-info"></div>
     <div class="location-time"></div>
     <div class="temperature-info">
-      <div class="temperature-icon"><img src="" alt=""></div>
+      <div class="temperature-container">
+        <div class="temperature-icon"><img></div>
+        <div class="temperature-degrees"></div>
+      </div>
       <div class="icon-description"></div>
-      <div class="temperature-degrees"></div>
     </div>
-    <div class="feels-like-temperature"></div>
   </div>
+
   <div class="forecast-container">
     <div class="forecast-weather">
       <div class="forecast-date"></div>
-      <div class="forecast-icon"><img src="" alt=""></div>
+      <div class="forecast-icon"><img></div>
       <div class="forecast-degrees">
         <div class="min-degrees"></div>
         <div class="max-degrees"></div>
@@ -52,7 +47,7 @@
 
     <div class="forecast-weather">
       <div class="forecast-date"></div>
-      <div class="forecast-icon"><img src="" alt=""></div>
+      <div class="forecast-icon"><img></div>
       <div class="forecast-degrees">
         <div class="min-degrees"></div>
         <div class="max-degrees"></div>
@@ -61,12 +56,11 @@
 
     <div class="forecast-weather">
       <div class="forecast-date"></div>
-      <div class="forecast-icon"><img src="" alt=""></div>
+      <div class="forecast-icon"><img></div>
       <div class="forecast-degrees">
         <div class="min-degrees"></div>
         <div class="max-degrees"></div>
       </div>
-    </div>
   </div>
 </body>
 </html>
