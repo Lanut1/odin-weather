@@ -10,7 +10,7 @@ async function getCurrentWeather(location = null, errorContainer) {
       else query = `${ipData.city}, ${ipData.country_name}`;
     } else query = location;
 
-    const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=a163bf31947f4c38b92111525240108&q=${query}&days=3&aqi=no&alerts=no`, {mode: "cors"});
+    const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=a163bf31947f4c38b92111525240108&q=${query}&days=3&aqi=no&alerts=no`, {mode: "cors"});
     if (!response.ok) throw new Error("Sorry, something went wrong!");
 
     const weatherData = await response.json();

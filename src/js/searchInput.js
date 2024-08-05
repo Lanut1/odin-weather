@@ -7,7 +7,7 @@ async function handleSearchInput(searchInput, autocompleteContainer, errorContai
     autocompleteContainer.replaceChildren();
     if (userQuery.length === 0) return;
 
-    const queryResponse = await fetch(`http://api.weatherapi.com/v1/search.json?key=a163bf31947f4c38b92111525240108&q=${userQuery}`, {mode: "cors"});
+    const queryResponse = await fetch(`https://api.weatherapi.com/v1/search.json?key=a163bf31947f4c38b92111525240108&q=${userQuery}`, {mode: "cors"});
     if (!queryResponse.ok) throw new Error("Sorry, something went wrong!");
 
     const queryData = await queryResponse.json();
